@@ -32,6 +32,24 @@ const loginUser = catchAsync(
   },
 );
 
+const logOut = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    res.cookie("token", "", {
+      httpOnly: true,
+      expires: new Date(0),
+      secure: false,
+      sameSite: "lax",
+    });
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Logged out successfully",
+      data: {},
+    });
+  },
+);
+
 const generateAccessToken = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { refreshToken } = req.cookies;
@@ -45,5 +63,5 @@ const generateAccessToken = catchAsync(
   },
 );
 
-const authController = { loginUser, generateAccessToken };
+const authController = { loginUser, generateAccessToken, logOut };
 export default authController;

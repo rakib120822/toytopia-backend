@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import { prisma } from "../../lib/prisma";
-import jwt, { JwtPayload, SignOptions } from "jsonwebtoken";
+import { JwtPayload } from "jsonwebtoken";
 import config from "../../config";
 import jwtUtils from "../../utils/jwtUtils";
 
