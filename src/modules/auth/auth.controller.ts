@@ -33,7 +33,16 @@ const loginUser = catchAsync(
 );
 
 const generateAccessToken = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {},
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { refreshToken } = req.cookies;
+    const { accessToken } = await authService.RefreshToken(refreshToken);
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.CREATED,
+      message: "Access token created successfully",
+      data: { accessToken },
+    });
+  },
 );
 
 const authController = { loginUser, generateAccessToken };

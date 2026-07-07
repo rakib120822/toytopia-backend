@@ -7,8 +7,21 @@ const createToken = async (
   return jwt.sign(payload, secret, { expiresIn } as SignOptions);
 };
 
+const verifyRefreshToken = async (refreshToken: string, secret: string) => {
+  try {
+    const result = jwt.verify(refreshToken, secret);
+    return { success: true, data: result };
+  } catch (error: any) {
+    return {
+      success: false,
+      error: error.message,
+    };
+  }
+};
+
 const jwtUtils = {
   createToken,
+  verifyRefreshToken,
 };
 
 export default jwtUtils;
