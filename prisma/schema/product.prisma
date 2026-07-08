@@ -1,0 +1,16 @@
+model Product {
+    id          String          @id @default(uuid())
+    title       String          @db.VarChar(255)
+    description String          @db.Text
+    price       Int
+    images      String[]
+    category    ProductCategory
+    stock       Int             @default(1)
+    brand       String          @db.VarChar(100)
+    ratings     Int?            @default(0)
+    status      ProductStatus   @default(DRAFT)
+    viewsCount  Int             @default(0)
+    isFeatured  Boolean         @default(false)
+    createdAt   DateTime        @default(now())
+    updatedAt   DateTime        @updatedAt
+}

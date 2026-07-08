@@ -7,3 +7,21 @@ enum Role {
     ADMIN
     USER
 }
+
+enum ProductCategory {
+    STEM
+    PUZZLES
+    PLUSHES
+    DOLLS
+    ACTION
+    FIGURES
+    BOARD_GAMES
+    OUTDOOR
+}
+
+enum ProductStatus {
+    DRAFT
+    PUBLISHED
+    OUT_OF_STOCK
+    ARCHIVED
+}

@@ -4,6 +4,7 @@ import config from "./config";
 import userRoutes from "./modules/user/user.route";
 import authRoutes from "./modules/auth/auth.route";
 import cookieParser from "cookie-parser";
+import productRoutes from "./modules/product/product.route";
 const app: Application = express();
 
 app.use(
@@ -18,6 +19,7 @@ app.use(cookieParser());
 
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/products", productRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello toytopia");
