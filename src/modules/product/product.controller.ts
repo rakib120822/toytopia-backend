@@ -29,10 +29,30 @@ const getProduct = catchAsync(
   },
 );
 const getProductById = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {},
+  async (req: Request, res: Response, next: NextFunction) => {
+    const result = await productService.getProductByIdFromDB(
+      req.params?.id as string,
+    );
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Product retrieved successfully",
+      data: result,
+    });
+  },
 );
 const updateProduct = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {},
+  async (req: Request, res: Response, next: NextFunction) => {
+    const id = req.params.id as string;
+    const update = req.body;
+    const result = await productService.updateProductIntoDB(id, update);
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Product updated successfully",
+      data: result,
+    });
+  },
 );
 const deleteProduct = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {},

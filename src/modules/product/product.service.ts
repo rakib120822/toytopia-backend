@@ -48,7 +48,7 @@ const getProductFromDB = async (query: IQuery) => {
     AndConditions.push({ title: query.title });
   }
   if (query.category) {
-    AndConditions.push({ category: query.category as ProductCategory});
+    AndConditions.push({ category: query.category as ProductCategory });
   }
   if (query.brand) {
     AndConditions.push({ brand: query.brand });
@@ -83,8 +83,21 @@ const getProductFromDB = async (query: IQuery) => {
     data: { categories, product },
   };
 };
-const getProductByIdFromDB = async () => {};
-const updateProductIntoDB = async () => {};
+const getProductByIdFromDB = async (id: string) => {
+  const product = await prisma.product.findUniqueOrThrow({
+    where: { id },
+  });
+
+  return product;
+};
+const updateProductIntoDB = async (id: string, payload: IProduct) => {
+  await prisma.product.findUniqueOrThrow({ where: { id } });
+  const newProduct = await prisma.product.update({
+    where: { id },
+    data: payload,
+  });
+  return newProduct;
+};
 const deleteProductIntoDB = async () => {};
 
 const productService = {
