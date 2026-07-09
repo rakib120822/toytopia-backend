@@ -86,6 +86,11 @@ const getProductFromDB = async (query: IQuery) => {
 const getProductByIdFromDB = async (id: string) => {
   const product = await prisma.product.findUniqueOrThrow({
     where: { id },
+    include: {
+      review: {
+        include: { user: { select: { id: true, name: true, email: true } } },
+      },
+    },
   });
 
   return product;
