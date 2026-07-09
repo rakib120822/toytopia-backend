@@ -98,7 +98,11 @@ const updateProductIntoDB = async (id: string, payload: IProduct) => {
   });
   return newProduct;
 };
-const deleteProductIntoDB = async () => {};
+const deleteProductIntoDB = async (id: string) => {
+  await prisma.product.findUniqueOrThrow({ where: { id } });
+  await prisma.product.delete({ where: { id } });
+  return {};
+};
 
 const productService = {
   createProductIntoDB,
