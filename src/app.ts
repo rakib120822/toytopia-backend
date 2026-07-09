@@ -6,6 +6,7 @@ import authRoutes from "./modules/auth/auth.route";
 import cookieParser from "cookie-parser";
 import productRoutes from "./modules/product/product.route";
 import reviewRoutes from "./modules/review/review.routes";
+import cartRoutes from "./modules/cart/cart.route";
 const app: Application = express();
 
 app.use(
@@ -22,6 +23,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/reviews", reviewRoutes);
+app.use("/api/cart", cartRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello toytopia");
