@@ -1,0 +1,11 @@
+model Payment {
+    id            String        @id @default(uuid())
+    orderId       String
+    transactionId String
+    amount        Int
+    status        PaymentStatus @default(PENDING)
+    order         Orders        @relation(fields: [orderId], references: [id], onDelete: Cascade)
+    meta          Json?
+    createdAt     DateTime      @default(now())
+    updatedAt     DateTime      @updatedAt
+}

@@ -1,0 +1,26 @@
+model Orders {
+    id          String      @id @default(uuid())
+    customerId  String
+    totalAmount Int
+    status      OrderStatus @default(PENDING)
+    customer    User        @relation(fields: [customerId], references: [id], onDelete: Cascade)
+    payment     Payment[]
+    createdAt   DateTime    @default(now())
+    updatedAt   DateTime    @updatedAt
+    address     String
+    phone       String      @db.VarChar(12)
+    // product     Product?    @relation(fields: [productId], references: [id])
+    // productId   String?
+    orderItems  OrderItem[]
+}
+
+model OrderItem {
+    id        String   @id @default(uuid())
+    orderId   String
+    productId String
+    product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+    order     Orders   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+    quantity  Int
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}

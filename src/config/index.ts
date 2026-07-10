@@ -13,4 +13,6 @@ export default {
   access_token_expiresIn: process.env.ACCESS_EXPIRES_IN!,
   refresh_token_secret: process.env.REFRESH_TOKEN_SECRET!,
   refresh_token_expiresIn: process.env.REFRESH_EXPIRES_IN!,
+  ssl_commerz_store_id: process.env.SSL_COMMERZ_STORE_ID!,
+  ssl_commerz_store_pass: process.env.SSL_COMMERZ_STORE_PASSWORD!,
 };

@@ -10,6 +10,7 @@ model User {
     profile      Profile?
     review       Review[]
     cart         Cart[]
+    order        Orders[]
 
     @@map("users")
 }

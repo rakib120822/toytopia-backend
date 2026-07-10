@@ -15,4 +15,6 @@ model Product {
     updatedAt   DateTime        @updatedAt
     review      Review[]
     cart        Cart[]
+    // order       Orders[]
+    orderItem   OrderItem[]
 }

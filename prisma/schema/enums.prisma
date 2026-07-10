@@ -25,3 +25,17 @@ enum ProductStatus {
     OUT_OF_STOCK
     ARCHIVED
 }
+
+enum OrderStatus {
+    PENDING
+    PAID
+    SHIPPED
+    CANCELED
+}
+
+enum PaymentStatus {
+    PENDING
+    PAID
+    FAILED
+    CANCELED
+}
