@@ -1,3 +1,4 @@
+import { OrderStatus } from "../../../generated/prisma/enums";
 import { prisma } from "../../lib/prisma";
 
 const createOrderIntoDB = async (id: string, payload?: any) => {
@@ -50,5 +51,23 @@ const getOrder = async (id: string) => {
   return data;
 };
 
-const orderService = { createOrderIntoDB, getOrder };
+const getOrderById = async (id: string) => {
+  const order = await prisma.orders.findUniqueOrThrow({
+    where: { id },
+    include: { orderItems: { include: { product: true } } },
+  });
+
+  return order;
+};
+
+const updateOrder = async (id: string, status: OrderStatus) => {
+  const result = await prisma.orders.update({
+    where: { id },
+    data: { status },
+  });
+
+  return result;
+};
+
+const orderService = { createOrderIntoDB, getOrder, getOrderById, updateOrder };
 export default orderService;

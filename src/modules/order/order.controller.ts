@@ -3,6 +3,7 @@ import catchAsync from "../../utils/catchAsync";
 import orderService from "./order.service";
 import sendResponse from "../../utils/sendResponse";
 import httpStatus from "http-status";
+import { OrderItem, OrderStatus } from "../../../generated/prisma/client";
 
 const createOrder = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -25,7 +26,7 @@ const getOrder = catchAsync(
     );
     sendResponse(res, {
       success: true,
-      statusCode: httpStatus.CREATED,
+      statusCode: httpStatus.OK,
       message: "Order retrieved successfully",
       data: result,
     });
@@ -34,11 +35,30 @@ const getOrder = catchAsync(
 
 const getOrderById = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    
+    const id = req.params.id as string;
+    const result = await orderService.getOrderById(id);
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Order retrieved successfully",
+      data: result,
+    });
   },
 );
 const updateOrder = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {},
+  async (req: Request, res: Response, next: NextFunction) => {
+    const status = req.query.status as OrderStatus;
+    const result = await orderService.updateOrder(
+      req.params.id as string,
+      status,
+    );
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Order updated successfully",
+      data: result,
+    });
+  },
 );
 
 const orderController = {
