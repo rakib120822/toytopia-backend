@@ -8,6 +8,8 @@ import productRoutes from "./modules/product/product.route";
 import reviewRoutes from "./modules/review/review.routes";
 import cartRoutes from "./modules/cart/cart.route";
 import orderRoutes from "./modules/order/order.route";
+import { globalErrorHandler } from "./middleware/globalErrorHandler";
+import { notFound } from "./middleware/notFound";
 const app: Application = express();
 
 app.use(
@@ -30,5 +32,8 @@ app.use("/api/orders", orderRoutes);
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello toytopia");
 });
+
+app.use(notFound);
+app.use(globalErrorHandler);
 
 export default app;
